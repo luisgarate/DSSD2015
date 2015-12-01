@@ -1,0 +1,32 @@
+<?php
+namespace API\Controller;
+
+class RevistaController extends BaseController {
+
+  private static $instance;
+
+  public static function getInstance(){
+    if(!isset(self::$instance))
+      self::$instance = new RevistaController();
+    return self::$instance;
+  }
+
+  public function sugerir(){
+    //Obtengo revistas relacionadas con keywords del articulo
+    $revistas = array(
+      "revista 1", "revista 2", "revista 3", "revista 4", "revista 5", "revista 6",
+      "revista 7", "revista 8", "revista 9", "revista 10", "revista 11", "revista 12",
+    );
+    //Simulo la elección de las revistas relacionadas
+    shuffle($revistas);
+    return $this->getJSONResponse(array_slice($revistas, 0, 3));
+  }
+
+  public function publicar(){
+    //Recibe un pedido de publicaciòn de revista
+    //Simulo la aprobación
+    return $this->getJSONResponse(array(
+      "aprobado"=>rand(0, 1)
+    ));
+  }
+}
